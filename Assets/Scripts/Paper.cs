@@ -33,7 +33,7 @@ public class Paper : MonoBehaviour {
       UpdateDisplayText();
 
       if (CurrentTypedPosition == (Sentence.Length - 1)) {
-        SentenceFinished.Invoke();
+        SentenceFinished?.Invoke();
         return true;
       }
 

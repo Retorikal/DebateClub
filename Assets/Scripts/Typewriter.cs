@@ -18,7 +18,7 @@ public class Typewriter : MonoBehaviour {
   Paper currentPaper;
   bool sentenceFinished;
 
-  public event Action<TypingStatistics> SentenceSubmit;
+  public event Action<TypingStatistics> SentenceSubmitted;
 
   // Start is called before the first frame update
   void Start() {
@@ -60,6 +60,8 @@ public class Typewriter : MonoBehaviour {
 
     var statistics = new TypingStatistics();
     statistics.sentence = currentPaper.SentenceSRO;
+
+    SentenceSubmitted?.Invoke(statistics);
 
     return true;
   }
