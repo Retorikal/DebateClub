@@ -4,6 +4,7 @@ Logs/
 SwitchIL2CPPCache/
 SwitchIL2CPPStats/
 UserSettings/
+ProjectSettings/ProjectVersion.txt
 
 # FMOD related
 # Never ignore DLLs in the FMOD subfolder.
