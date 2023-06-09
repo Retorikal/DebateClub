@@ -7,11 +7,11 @@ using System;
 public class Paper : MonoBehaviour {
   public int CurrentTypedPosition { get; private set; }
   public string Sentence { get; private set; }
+  public SentenceSRO SentenceSRO { get; private set; }
+
   public event Action SentenceFinished;
 
   [SerializeField] private TMPro.TMP_Text _textSentence;
-
-  SentenceSRO sentenceSRO;
 
   // Start is called before the first frame update
   void Start() {
@@ -20,33 +20,29 @@ public class Paper : MonoBehaviour {
 
   // To be called when a new sentence is added. Resets everything and 
   // animates entry
-  void Init(SentenceSRO s) {
+  public void Init(SentenceSRO s) {
     CurrentTypedPosition = 0;
-    sentenceSRO = s;
-    Sentence = _textSentence.text = sentenceSRO.sentence;
+    SentenceSRO = s;
+    Sentence = _textSentence.text = SentenceSRO.sentence;
   }
 
   // Get the letter and if correct, advance current typing position
   // Invoke next SentenceFinished if last letter is typed
   bool AdvanceNextLetter(char letter) {
-    
-    if (letter.Equals(Sentence[CurrentTypedPosition]))
-    {
+    if (letter.Equals(Sentence[CurrentTypedPosition])) {
       UpdateDisplayText();
-      
-      if(CurrentTypedPosition == (Sentence.Length-1))
-      {
-          SentenceFinished.Invoke();
-          return true;
+
+      if (CurrentTypedPosition == (Sentence.Length - 1)) {
+        SentenceFinished.Invoke();
+        return true;
       }
-      
+
       CurrentTypedPosition++;
     }
     return true;
   }
 
-  void UpdateDisplayText()
-  {
+  void UpdateDisplayText() {
     Color32 _activeColor = Color.green;
     int meshIndex = _textSentence.textInfo.characterInfo[CurrentTypedPosition].materialReferenceIndex;
     int vertexIndex = _textSentence.textInfo.characterInfo[CurrentTypedPosition].vertexIndex;
@@ -55,7 +51,7 @@ public class Paper : MonoBehaviour {
     vertexColors[vertexIndex + 1] = _activeColor;
     vertexColors[vertexIndex + 2] = _activeColor;
     vertexColors[vertexIndex + 3] = _activeColor;
-    
+
     _textSentence.UpdateVertexData(TMPro.TMP_VertexDataUpdateFlags.All);
   }
 

@@ -4,7 +4,8 @@ Logs/
 SwitchIL2CPPCache/
 SwitchIL2CPPStats/
 UserSettings/
-ProjectSettings/ProjectVersion.txt
+obj/
+.vscode/
 
 # FMOD related
 # Never ignore DLLs in the FMOD subfolder.
@@ -20,9 +21,10 @@ ProjectSettings/ProjectVersion.txt
 # Ignore bank files in the StreamingAssets folder.
 /[Aa]ssets/StreamingAssets/**/*.bank
 /[Aa]ssets/StreamingAssets/**/*.bank.meta
+
                     
 # If the source bank files are kept outside of the StreamingAssets folder then these can be ignored.
 # Log files can be ignored.
-fmod_editor.log
 
-.vscode/
+ProjectSettings/ProjectVersion.txt
+fmod_editor.log

@@ -25,7 +25,7 @@ public class Typewriter : MonoBehaviour {
     papers = GetComponentsInChildren<Paper>();
 
     foreach (var paper in papers) {
-      paper.SentenceFinish += OnSentenceFinish;
+      paper.SentenceFinished += OnSentenceFinish;
     }
   }
 
@@ -59,7 +59,7 @@ public class Typewriter : MonoBehaviour {
       return false;
 
     var statistics = new TypingStatistics();
-    statistics.
+    statistics.sentence = currentPaper.SentenceSRO;
 
     return true;
   }
