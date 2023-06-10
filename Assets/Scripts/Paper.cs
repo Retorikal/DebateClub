@@ -11,7 +11,7 @@ public class Paper : MonoBehaviour {
 
   public event Action SentenceFinished;
 
-  [SerializeField] private TMPro.TMP_Text _textSentence;
+  TMPro.TMP_Text _textSentence;
 
   // Start is called before the first frame update
   void Start() {
@@ -24,13 +24,17 @@ public class Paper : MonoBehaviour {
     CurrentTypedPosition = 0;
     SentenceSRO = s;
     Sentence = _textSentence.text = SentenceSRO.sentence;
+    _textSentence = GetComponentInChildren<TMPro.TMP_Text>();
   }
 
   // Get the letter and if correct, advance current typing position
   // Invoke next SentenceFinished if last letter is typed
   public bool AdvanceNextLetter(char letter) {
     if ((CurrentTypedPosition < Sentence.Length) && letter.Equals(Sentence[CurrentTypedPosition])) {
-      UpdateDisplayText();
+      if(letter != ' ')
+      {
+        UpdateDisplayText();
+      }
 
       if (CurrentTypedPosition == (Sentence.Length - 1)) {
         SentenceFinished?.Invoke();
@@ -44,6 +48,7 @@ public class Paper : MonoBehaviour {
   }
 
   void UpdateDisplayText() {
+    Debug.Log("Current changed char" + _textSentence.textInfo.characterInfo[CurrentTypedPosition].character);
     Color32 _activeColor = Color.green;
     int meshIndex = _textSentence.textInfo.characterInfo[CurrentTypedPosition].materialReferenceIndex;
     int vertexIndex = _textSentence.textInfo.characterInfo[CurrentTypedPosition].vertexIndex;
