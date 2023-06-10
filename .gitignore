@@ -28,3 +28,4 @@ obj/
 
 ProjectSettings/ProjectVersion.txt
 fmod_editor.log
+*.csproj
