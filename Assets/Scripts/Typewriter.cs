@@ -22,7 +22,8 @@ public class Typewriter : MonoBehaviour {
   TypingStatistics _currentStatistics;
   bool _sentenceFinished;
 
-  public event Action<TypingStatistics> SentenceSubmitted;
+  public event Action<TypingStatistics> SentenceSubmit;
+  public event Action Typo;
 
   // Set the senteces of all papers
   public void SetSentences(IEnumerable<SentenceSRO> sentences) {
@@ -40,7 +41,7 @@ public class Typewriter : MonoBehaviour {
   // Start is called before the first frame update
   void Start() {
     foreach (var paper in _papers) {
-      paper.SentenceFinished += OnSentenceFinish;
+      paper.SentenceFinish += OnSentenceFinish;
     }
   }
 
@@ -105,7 +106,7 @@ public class Typewriter : MonoBehaviour {
     if (!_sentenceFinished)
       return false;
 
-    SentenceSubmitted?.Invoke(_currentStatistics);
+    SentenceSubmit?.Invoke(_currentStatistics);
 
     return true;
   }

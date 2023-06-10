@@ -9,9 +9,13 @@ public class Paper : MonoBehaviour {
   public string Sentence { get; private set; }
   public SentenceSRO SentenceSRO { get; private set; }
 
-  public event Action SentenceFinished;
+  public event Action SentenceFinish;
 
   TMPro.TMP_Text _textSentence;
+
+  void Awake() {
+    _textSentence = GetComponentInChildren<TMPro.TMP_Text>();
+  }
 
   // Start is called before the first frame update
   void Start() {
@@ -24,20 +28,18 @@ public class Paper : MonoBehaviour {
     CurrentTypedPosition = 0;
     SentenceSRO = s;
     Sentence = _textSentence.text = SentenceSRO.sentence;
-    _textSentence = GetComponentInChildren<TMPro.TMP_Text>();
   }
 
   // Get the letter and if correct, advance current typing position
   // Invoke next SentenceFinished if last letter is typed
   public bool AdvanceNextLetter(char letter) {
     if ((CurrentTypedPosition < Sentence.Length) && letter.Equals(Sentence[CurrentTypedPosition])) {
-      if(letter != ' ')
-      {
+      if (letter != ' ') {
         UpdateDisplayText();
       }
 
       if (CurrentTypedPosition == (Sentence.Length - 1)) {
-        SentenceFinished?.Invoke();
+        SentenceFinish?.Invoke();
       }
 
       CurrentTypedPosition++;
