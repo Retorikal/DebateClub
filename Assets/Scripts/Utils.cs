@@ -29,5 +29,4 @@ public class EnumUtils {
       yield return new Pair<T, U>(default, secondEnumerator.Current);
     }
   }
-
 }

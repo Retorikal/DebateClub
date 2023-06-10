@@ -28,7 +28,7 @@ public class Paper : MonoBehaviour {
 
   // Get the letter and if correct, advance current typing position
   // Invoke next SentenceFinished if last letter is typed
-  bool AdvanceNextLetter(char letter) {
+  public bool AdvanceNextLetter(char letter) {
     if (letter.Equals(Sentence[CurrentTypedPosition])) {
       UpdateDisplayText();
 
@@ -57,7 +57,7 @@ public class Paper : MonoBehaviour {
 
   // Add exclamation mark to the end of sentence
   // bool festive: extra visual feedback
-  void AddExclamationMark(bool festive) {
+  public void AddExclamationMark(bool festive) {
 
   }
 

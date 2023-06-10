@@ -181,9 +181,6 @@
     <Reference Include="UnityEngine.SubstanceModule">
         <HintPath>/home/retorikal/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.SubstanceModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.SubsystemsModule">
-        <HintPath>/home/retorikal/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.SubsystemsModule.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.TLSModule">
         <HintPath>/home/retorikal/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.TLSModule.dll</HintPath>
     </Reference>
@@ -253,9 +250,6 @@
     <Reference Include="UnityEngine.VFXModule">
         <HintPath>/home/retorikal/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.VFXModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.VRModule">
-        <HintPath>/home/retorikal/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.VRModule.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.VehiclesModule">
         <HintPath>/home/retorikal/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.VehiclesModule.dll</HintPath>
     </Reference>
@@ -267,9 +261,6 @@
     </Reference>
     <Reference Include="UnityEngine.WindModule">
         <HintPath>/home/retorikal/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.WindModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.XRModule">
-        <HintPath>/home/retorikal/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
         <HintPath>/home/retorikal/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed/UnityEngine/UnityEditor.dll</HintPath>
@@ -316,8 +307,17 @@
     <Reference Include="UnityEditor.UnityConnectModule">
         <HintPath>/home/retorikal/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Analytics.StandardEvents">
+        <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/PackageCache/com.unity.analytics@3.6.12/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.Editor">
+        <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/PackageCache/com.unity.analytics@3.6.12/Unity.Analytics.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
         <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/PackageCache/com.unity.visualscripting@1.8.0/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.Tracker">
+        <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/PackageCache/com.unity.analytics@3.6.12/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
         <HintPath>/home/retorikal/Unity/Hub/Editor/2021.3.21f1/Editor/Data/NetStandard/ref/2.1.0/netstandard.dll</HintPath>
@@ -691,17 +691,14 @@
     <Reference Include="Unity.VSCode.Editor">
         <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Shared.Editor">
-        <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll</HintPath>
+    <Reference Include="Unity.2D.Tilemap.Editor">
+        <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
         <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
         <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-        <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
         <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
@@ -718,6 +715,9 @@
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
         <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+        <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
         <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
     </Reference>
@@ -730,14 +730,26 @@
     <Reference Include="Unity.Rider.Editor">
         <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Analytics">
+        <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Analytics.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
         <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.State">
-        <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Core">
         <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.VisualScripting.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.DataPrivacy">
+        <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Shared.Editor">
+        <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+        <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.State">
+        <HintPath>/home/retorikal/Unity/Projects/Debate Club/Library/ScriptAssemblies/Unity.VisualScripting.State.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
