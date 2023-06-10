@@ -5,85 +5,116 @@ using System;
 
 // Responsible for sentence reading, calculating per-sentence wpm, 
 public class Typewriter : MonoBehaviour {
+  [System.Serializable]
   public class TypingStatistics {
     public double lpm;
     public System.DateTime startTime;
     public int mistakes;
-    public int punctuations;
-    public double rating;
+    public int punctuations; // Between 0 to 10 too
+    public double rating; // between 0 to 10
     public SentenceSRO sentence;
   }
 
-  Paper[] papers;
-  Paper currentPaper;
-  TypingStatistics currentStatistics;
-  bool sentenceFinished;
+  public int PaperCount { get { return _papers.Length; } }
+
+  Paper[] _papers;
+  Paper _currentPaper;
+  TypingStatistics _currentStatistics;
+  bool _sentenceFinished;
 
   public event Action<TypingStatistics> SentenceSubmitted;
 
-  // Start is called before the first frame update
-  void Start() {
-    papers = GetComponentsInChildren<Paper>();
-
-    foreach (var paper in papers) {
-      paper.SentenceFinished += OnSentenceFinish;
-    }
-  }
-
   // Set the senteces of all papers
   public void SetSentences(IEnumerable<SentenceSRO> sentences) {
-    foreach (var item in EnumUtils.Zip(papers, sentences)) {
+    var r = new System.Random();
+    foreach (var item in EnumUtils.Zip(EnumUtils.Shuffled(_papers), sentences)) {
       item.first?.Init(item.second);
     }
   }
 
-  // Update is called once per frame
-  void Update() {
-    char input = '\0';
-
-    // Read input
-
-    if (input != '\0')
-      UpdatePaper(input);
+  // Awake
+  void Awake() {
+    _papers = GetComponentsInChildren<Paper>();
   }
 
-  // 
-  void UpdatePaper(char c) {
-    if (c == '!' && sentenceFinished) {
-      bool festive = false;
-      currentPaper.AddExclamationMark(festive);
-      Debug.Log("EXCLAMATION!");
-    } else {
-      if (currentPaper == null) {
-        currentStatistics.startTime = System.DateTime.Now;
-      }
-
-
-      bool isCorrect = currentPaper.AdvanceNextLetter(c);
-      currentStatistics.mistakes += isCorrect ? 1 : 0;
-      Debug.Log("Typed" + c, this);
+  // Start is called before the first frame update
+  void Start() {
+    foreach (var paper in _papers) {
+      paper.SentenceFinished += OnSentenceFinish;
     }
   }
 
-  void AssignPaper() {
-    currentStatistics = new TypingStatistics {
-      sentence = currentPaper.SentenceSRO,
-    };
+
+  // Update is called once per frame
+  void Update() {
+    // Read input
+    string s = Input.inputString;
+    if (!(s == "")) {
+      char c = s[0];
+      switch ((int)c) {
+        case 8: // backspace
+          Debug.Log("No need to backspace.", this);
+          break;
+        case 13: // enter
+          AttemptSubmitSentence();
+          break;
+        default:
+          UpdatePaper(c);
+          break;
+      }
+    }
+  }
+
+  // Handle paper state based on input
+  void UpdatePaper(char c) {
+    if (c == '!' && _sentenceFinished) {
+      bool festive = false;
+      _currentPaper.AddExclamationMark(festive);
+      _currentStatistics.punctuations++;
+      Debug.Log("EXCLAMATION!");
+    } else {
+      // Check and assign the SentenceSRO if not locked in yet
+      if (_currentPaper == null) {
+        _currentStatistics = new TypingStatistics {
+          startTime = System.DateTime.Now,
+          mistakes = 0
+        };
+
+        foreach (var paper in _papers) {
+          if (!paper.AdvanceNextLetter(c))
+            continue;
+
+          Debug.Log("Sentence locked in: " + paper.Sentence, this);
+          _currentPaper = paper;
+          _currentStatistics.sentence = _currentPaper.SentenceSRO;
+          break;
+        }
+
+        return;
+      }
+
+      bool isCorrect = _currentPaper.AdvanceNextLetter(c);
+      _currentStatistics.mistakes += isCorrect ? 0 : 1;
+      Debug.Log("Typed " + c + (isCorrect ? "(Hit)" : "(Miss)"), this);
+    }
   }
 
   bool AttemptSubmitSentence() {
-    if (!sentenceFinished)
+    Debug.Log("AttemptSubmitSentence", this);
+    _currentPaper = null;
+    if (!_sentenceFinished)
       return false;
 
-    SentenceSubmitted?.Invoke(currentStatistics);
+    SentenceSubmitted?.Invoke(_currentStatistics);
 
     return true;
   }
 
   void OnSentenceFinish() {
-    var timeDiff = (System.DateTime.Now - currentStatistics.startTime).Seconds;
-    currentStatistics.lpm = 60 * (currentPaper.SentenceSRO.sentence.Length / timeDiff);
+    Debug.Log("OnSentenceFinish", this);
+    var timeDiff = (System.DateTime.Now - _currentStatistics.startTime).Seconds;
+    _currentStatistics.lpm = 60 * (_currentPaper.SentenceSRO.sentence.Length / timeDiff);
 
-    sentenceFinished = true;
+    _sentenceFinished = true;
   }
 }

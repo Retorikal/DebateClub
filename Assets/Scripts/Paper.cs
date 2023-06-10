@@ -29,17 +29,18 @@ public class Paper : MonoBehaviour {
   // Get the letter and if correct, advance current typing position
   // Invoke next SentenceFinished if last letter is typed
   public bool AdvanceNextLetter(char letter) {
-    if (letter.Equals(Sentence[CurrentTypedPosition])) {
+    if ((CurrentTypedPosition < Sentence.Length) && letter.Equals(Sentence[CurrentTypedPosition])) {
       UpdateDisplayText();
 
       if (CurrentTypedPosition == (Sentence.Length - 1)) {
         SentenceFinished?.Invoke();
-        return true;
       }
 
       CurrentTypedPosition++;
+      return true;
     }
-    return true;
+
+    return false;
   }
 
   void UpdateDisplayText() {
