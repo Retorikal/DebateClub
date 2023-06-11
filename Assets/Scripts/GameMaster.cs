@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MEC;
-using DentedPixel;
-using System;
+using UnityEngine.Events;
 
 public class GameMaster : MonoBehaviour {
   [SerializeField] double _roundDuration;
@@ -13,12 +11,19 @@ public class GameMaster : MonoBehaviour {
   [SerializeField] List<Typewriter.TypingStatistics> _stats;
 
   [SerializeField] double _timeRemaining;
-  [SerializeField] bool _gameStarted = false;
+  [SerializeField] bool _isGameStarted = false;
+  [SerializeField] UnityEvent _gameFinish;
+  [SerializeField] UnityEvent _gameStart;
 
-  TMPro.TextMeshPro timerLabel;
+  TMPro.TextMeshProUGUI _timerLabel;
+  RoundCompleteDisplay _roundCompleteDisplay;
 
   void Awake() {
-    timerLabel = transform.GetChild(0).GetComponent<TMPro.TextMeshPro>();
+    var canvas = transform.GetChild(0);
+    _timerLabel = canvas.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
+    _roundCompleteDisplay = transform.GetChild(1).GetComponent<RoundCompleteDisplay>();
+    _gameFinish ??= new UnityEvent();
+    _gameStart ??= new UnityEvent();
   }
 
   // Start is called before the first frame update
@@ -38,20 +43,33 @@ public class GameMaster : MonoBehaviour {
 
   // Update is called once per frame
   void Update() {
-    if (_timeRemaining >= 0 && _gameStarted)
+    if (_timeRemaining > 0 && _isGameStarted)
       _timeRemaining -= Time.deltaTime;
+    else {
+      _timeRemaining = 0;
+      GameFinish();
+    }
 
-    timerLabel.text = $"{((int)_timeRemaining) / 60}:{_timeRemaining % 60:00}";
+    _timerLabel.text = $"{((int)_timeRemaining) / 60}:{_timeRemaining % 60:00}";
   }
 
+  // Start da game
   void GameStart() {
     if (_wordLists.Length != _typewriter.PaperCount) {
       _typewriter.SetSentences(_fixedSentences);
       return;
     }
 
-    _gameStarted = true;
+    _isGameStarted = true;
     _typewriter.SetSentences(GetRandomSentences());
+    _gameStart.Invoke();
+  }
+
+  void GameFinish() {
+    _gameFinish.Invoke();
+    _roundCompleteDisplay.Init(new RoundCompleteDisplay.DisplayStats() {
+      // Stat to display..
+    });
   }
 
   IEnumerable<SentenceSRO> GetRandomSentences() {
