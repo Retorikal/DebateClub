@@ -12,7 +12,7 @@ public class Typewriter : MonoBehaviour {
     public int mistakes;
     public int punctuations; // Between 0 to 10 too
     public double rating; // between 0 to 10
-    public SentenceSRO sentence;
+    public SentenceSRO sentenceSRO;
   }
 
   public int PaperCount { get { return _papers.Length; } }
@@ -87,7 +87,7 @@ public class Typewriter : MonoBehaviour {
 
           Debug.Log("Sentence locked in: " + paper.Sentence, this);
           _currentPaper = paper;
-          _currentStatistics.sentence = _currentPaper.SentenceSRO;
+          _currentStatistics.sentenceSRO = _currentPaper.SentenceSRO;
           break;
         }
 
@@ -106,6 +106,7 @@ public class Typewriter : MonoBehaviour {
     if (!_sentenceFinished)
       return false;
 
+    _sentenceFinished = false;
     SentenceSubmit?.Invoke(_currentStatistics);
 
     return true;
@@ -113,7 +114,7 @@ public class Typewriter : MonoBehaviour {
 
   void OnSentenceFinish() {
     Debug.Log("OnSentenceFinish", this);
-    var timeDiff = (System.DateTime.Now - _currentStatistics.startTime).Seconds;
+    var timeDiff = (System.DateTime.Now - _currentStatistics.startTime).TotalSeconds;
     _currentStatistics.lpm = 60 * (_currentPaper.SentenceSRO.sentence.Length / timeDiff);
 
     _sentenceFinished = true;

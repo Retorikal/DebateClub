@@ -6,8 +6,14 @@ using UnityEngine;
 public class RoundCompleteDisplay : MonoBehaviour {
 
   // TODO: Isinya value yang mau didisplay.
+  [System.Serializable]
   public struct DisplayStats {
-
+    public int LongestPerfectStreak;
+    public int HighestHypeLevel;
+    public double LPM;
+    public int Perfects;
+    public int Mistakes;
+    public SentenceSRO.Tone Style;
   }
 
   TMPro.TextMeshProUGUI _displayLabel;
