@@ -23,14 +23,14 @@ public class GameMaster : MonoBehaviour {
   [SerializeField] int _perfectStreak;
   [SerializeField] int _longestPerfectStreak;
 
-  TMPro.TextMeshProUGUI _timerLabel;
+  [SerializeField] TMPro.TextMeshProUGUI _timerLabel;
   RoundCompleteDisplay _roundCompleteDisplay;
   GameObject _gameStartScreen;
   GameObject _gameEndScreen;
 
   void Awake() {
     var canvas = transform.GetChild(0);
-    _timerLabel = canvas.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
+    //_timerLabel = canvas.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
     _roundCompleteDisplay = canvas.GetChild(1).GetComponent<RoundCompleteDisplay>();
     _gameEndScreen = canvas.GetChild(1).gameObject;
     _gameStartScreen = canvas.GetChild(2).gameObject;
@@ -75,7 +75,7 @@ public class GameMaster : MonoBehaviour {
       return;
     }
 
-    LeanTween.moveLocalY(_gameStartScreen, 540, 0.5f);
+    LeanTween.moveLocalY(_gameStartScreen, 1000, 0.5f);
     _isGameStarted = true;
     _typewriter.SetSentences(GetRandomSentences());
     _gameStart.Invoke();
