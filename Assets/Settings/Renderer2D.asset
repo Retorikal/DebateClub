@@ -16,8 +16,7 @@ MonoBehaviour:
     debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7, type: 3}
   m_RendererFeatures:
   - {fileID: 6656747837755501071}
-  - {fileID: 8953912713982328259}
-  m_RendererFeatureMap: 0f2ac4b4e384615cc33dc56a2cb0427c
+  m_RendererFeatureMap: 0f2ac4b4e384615c
   m_UseNativeRenderPass: 0
   m_TransparencySortMode: 0
   m_TransparencySortAxis: {x: 0, y: 1, z: 0}
