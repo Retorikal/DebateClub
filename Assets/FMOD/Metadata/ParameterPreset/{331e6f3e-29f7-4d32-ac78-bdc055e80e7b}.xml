@@ -24,7 +24,7 @@
 			<value>Mach 3</value>
 		</property>
 		<property name="initialValue">
-			<value>0</value>
+			<value>2</value>
 		</property>
 	</object>
 </objects>
