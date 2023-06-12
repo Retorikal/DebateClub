@@ -23,7 +23,8 @@ public class RoundCompleteDisplay : MonoBehaviour {
   public void Init(DisplayStats ds) {
     // TODO: Ini string formatnya sekian value terus ada newlinenya
     // Pas panggil init pake String.Format untuk replacein nilainya
-    string displayFormat = "{0}\n ";
+    string displayFormat = $"{ds.LongestPerfectStreak}\n{ds.HighestHypeLevel}\n{ds.LPM}\n{ds.Perfects}\n{ds.Mistakes}\n{ds.Style.ToString()}";
+    _displayLabel.text = displayFormat;
   }
 
   void Awake() {
