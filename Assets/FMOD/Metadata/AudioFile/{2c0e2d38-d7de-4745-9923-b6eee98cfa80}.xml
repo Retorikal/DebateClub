@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{2c0e2d38-d7de-4745-9923-b6eee98cfa80}">
+		<property name="assetPath">
+			<value>Mach Up.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>3.8922448979591837</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e13d5752-3337-4c28-beb1-8393899b2b47}</destination>
+		</relationship>
+	</object>
+</objects>
