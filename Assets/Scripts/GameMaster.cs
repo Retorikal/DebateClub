@@ -24,6 +24,7 @@ public class GameMaster : MonoBehaviour {
   [SerializeField] bool _isGameFinished = false;
   [SerializeField] UnityEvent _gameFinish;
   [SerializeField] UnityEvent _gameStart;
+  [SerializeField] UnityEvent _sentenceSubmitted;
   [SerializeField] UnityEvent<int> _machLevelChange;
 
   // Statistics
@@ -50,7 +51,7 @@ public class GameMaster : MonoBehaviour {
       }
 
       _machLevel = newMachLevel;
-      _hypeLevel = value;
+      _hypeLevel = Mathf.Clamp(0, (float)value, (float)_maxHypeLevel);
     }
   }
 
@@ -63,6 +64,8 @@ public class GameMaster : MonoBehaviour {
 
     _gameFinish ??= new UnityEvent();
     _gameStart ??= new UnityEvent();
+    _sentenceSubmitted ??= new UnityEvent();
+    _machLevelChange ??= new UnityEvent<int>();
   }
 
   // Start is called before the first frame update
@@ -170,7 +173,8 @@ public class GameMaster : MonoBehaviour {
       _punctuationOverMultiplier; // penalty if wrong guess
     double hypeLevelIncrease = stats.rating * multiplier * _submitHypeMultiplier;
 
-    HypeLevel = Mathf.Min(_maxHypeLevel, hypeLevelIncrease + HypeLevel);
+    HypeLevel += hypeLevelIncrease;
+    _sentenceSubmitted.Invoke();
   }
 
   void OnTypo() {

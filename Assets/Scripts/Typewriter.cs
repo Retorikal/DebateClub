@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 
 // Responsible for sentence reading, calculating per-sentence wpm, 
@@ -15,6 +16,9 @@ public class Typewriter : MonoBehaviour {
     public SentenceSRO sentenceSRO;
   }
 
+  [SerializeField] UnityEvent _type;
+  [SerializeField] UnityEvent _typo;
+  [SerializeField] UnityEvent _exclamation;
   [SerializeField] double _maxRatingLPM = 325;
   public int PaperCount { get { return _papers.Length; } }
 
@@ -37,6 +41,9 @@ public class Typewriter : MonoBehaviour {
   // Awake
   void Awake() {
     _papers = GetComponentsInChildren<Paper>();
+    _type ??= new UnityEvent();
+    _typo ??= new UnityEvent();
+    _exclamation ??= new UnityEvent();
   }
 
   // Start is called before the first frame update
@@ -73,6 +80,7 @@ public class Typewriter : MonoBehaviour {
       bool festive = false;
       _currentPaper.AddExclamationMark(festive);
       _currentStatistics.punctuations++;
+      _exclamation.Invoke();
       Debug.Log("EXCLAMATION!");
     } else {
       // Check and assign the SentenceSRO if not locked in yet
@@ -89,15 +97,24 @@ public class Typewriter : MonoBehaviour {
           Debug.Log("Sentence locked in: " + paper.Sentence, this);
           _currentPaper = paper;
           _currentStatistics.sentenceSRO = _currentPaper.SentenceSRO;
+          _type.Invoke();
           break;
         }
 
+
+        _typo.Invoke();
         return;
       }
 
       bool isCorrect = _currentPaper.AdvanceNextLetter(c);
       _currentStatistics.mistakes += isCorrect ? 0 : 1;
       Debug.Log("Typed " + c + (isCorrect ? "(Hit)" : "(Miss)"), this);
+
+      if (isCorrect)
+        _type.Invoke();
+      else
+        _typo.Invoke();
+
     }
   }
 

@@ -5,9 +5,12 @@ using DentedPixel;
 using System;
 
 public class Paper : MonoBehaviour {
+  [SerializeField]
+  SentenceSRO _sentenceSRO;
+
   public int CurrentTypedPosition { get; private set; }
   public string Sentence { get; private set; }
-  public SentenceSRO SentenceSRO { get; private set; }
+  public SentenceSRO SentenceSRO { get { return _sentenceSRO; } private set { _sentenceSRO = value; } }
 
   public event Action SentenceFinish;
 
