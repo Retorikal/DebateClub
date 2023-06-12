@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class GameMaster : MonoBehaviour {
+
+  [SerializeField] double _maxHypeLevel = 10;
+  [SerializeField] double _hypeDecayRate = 0.12; // Hype decrease by time
+  [SerializeField] double _typoHypePenalty = 0.5; // Hype decrease when typo occurs
+  [SerializeField] double _submitHypeMultiplier = 0.3; // Submission rating multiplier when submitting
+  [SerializeField] double _punctuationBonusMultiplier = 0.08; // Extra multiplier for each punctuation if correct
+  [SerializeField] double _punctuationOverMultiplier = 0.8; // Fix multiplier if too much punctuation
   [SerializeField] double _roundDuration;
   [SerializeField] Typewriter _typewriter;
   [SerializeField] SentenceList[] _wordLists;
@@ -11,11 +18,14 @@ public class GameMaster : MonoBehaviour {
 
   [SerializeField] double _timeRemaining;
   [SerializeField] double _hypeLevel;
+  [SerializeField] int _machLevel;
+  [SerializeField] double[] _machLevelThresholds;
   [SerializeField] bool _isGameStarted = false;
   [SerializeField] bool _isGameFinished = false;
   [SerializeField] UnityEvent _gameFinish;
   [SerializeField] UnityEvent _gameStart;
-  [SerializeField] UnityEvent<int> _machIncrease;
+  [SerializeField] UnityEvent _sentenceSubmitted;
+  [SerializeField] UnityEvent<int> _machLevelChange;
 
   // Statistics
   [SerializeField] List<Typewriter.TypingStatistics> _stats;
@@ -28,6 +38,23 @@ public class GameMaster : MonoBehaviour {
   GameObject _gameStartScreen;
   GameObject _gameEndScreen;
 
+  double HypeLevel {
+    get { return _hypeLevel; }
+    set {
+      var newMachLevel = 0;
+      for (newMachLevel = 0; newMachLevel < _machLevelThresholds.Length; newMachLevel++)
+        if (value < _machLevelThresholds[newMachLevel])
+          break;
+
+      if (newMachLevel != _machLevel) {
+        _machLevelChange.Invoke(newMachLevel);
+      }
+
+      _machLevel = newMachLevel;
+      _hypeLevel = Mathf.Clamp(0, (float)value, (float)_maxHypeLevel);
+    }
+  }
+
   void Awake() {
     var canvas = transform.GetChild(0);
     //_timerLabel = canvas.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
@@ -37,6 +64,8 @@ public class GameMaster : MonoBehaviour {
 
     _gameFinish ??= new UnityEvent();
     _gameStart ??= new UnityEvent();
+    _sentenceSubmitted ??= new UnityEvent();
+    _machLevelChange ??= new UnityEvent<int>();
   }
 
   // Start is called before the first frame update
@@ -57,6 +86,8 @@ public class GameMaster : MonoBehaviour {
   // Update is called once per frame
   void Update() {
     if (_isGameStarted) {
+      HypeLevel -= _hypeDecayRate * Time.deltaTime;
+
       if (_timeRemaining > 0)
         _timeRemaining -= Time.deltaTime;
       else if (!_isGameFinished) {
@@ -137,9 +168,16 @@ public class GameMaster : MonoBehaviour {
     } else {
       _perfectStreak = 0;
     }
+    double multiplier = stats.punctuations <= stats.rating ?
+      stats.punctuations * _punctuationBonusMultiplier : // Multiply by punctuations if guessed correctly
+      _punctuationOverMultiplier; // penalty if wrong guess
+    double hypeLevelIncrease = stats.rating * multiplier * _submitHypeMultiplier;
+
+    HypeLevel += hypeLevelIncrease;
+    _sentenceSubmitted.Invoke();
   }
 
   void OnTypo() {
-
+    HypeLevel -= _typoHypePenalty;
   }
 }
