@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 44063c8c8f5afd943990a9c308962261
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -1
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Boleh
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 603cdb8c9a8f0ae47b7cc4fa03e9139c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 2
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
