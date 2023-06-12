@@ -15,6 +15,7 @@ public class Typewriter : MonoBehaviour {
     public SentenceSRO sentenceSRO;
   }
 
+  [SerializeField] double _maxRatingLPM = 325;
   public int PaperCount { get { return _papers.Length; } }
 
   Paper[] _papers;
@@ -116,6 +117,7 @@ public class Typewriter : MonoBehaviour {
     Debug.Log("OnSentenceFinish", this);
     var timeDiff = (System.DateTime.Now - _currentStatistics.startTime).TotalSeconds;
     _currentStatistics.lpm = 60 * (_currentPaper.SentenceSRO.sentence.Length / timeDiff);
+    _currentStatistics.rating = ((_currentStatistics.lpm / _maxRatingLPM) * 10) - _currentStatistics.mistakes;
 
     _sentenceFinished = true;
   }
