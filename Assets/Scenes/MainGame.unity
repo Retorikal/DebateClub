@@ -1537,8 +1537,8 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
-  - component: {fileID: 519420029}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1546,14 +1546,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &519420029
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1646,6 +1638,19 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 735742357}
 --- !u!1 &531256560
 GameObject:
   m_ObjectHideFlags: 0
@@ -1837,12 +1842,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHypeLevel: 10
-  _hypeDecayRate: 0.12
-  _typoHypePenalty: 0.5
-  _submitHypeMultiplier: 0.3
+  _hypeDecayRate: 0.06
+  _typoHypePenalty: 0.2
+  _submitHypeMultiplier: 1
   _punctuationBonusMultiplier: 0.08
-  _punctuationOverMultiplier: 0.8
-  _roundDuration: 10
+  _punctuationOverMultiplier: 0.81
+  _roundDuration: 90
   _typewriter: {fileID: 919656262}
   _wordLists:
   - tone: 0
@@ -1850,10 +1855,26 @@ MonoBehaviour:
   - tone: 1
     sentenceFile: {fileID: 4900000, guid: 6eb10323807a45445b037fd6d35ebaa7, type: 3}
   _fixedSentences: []
+  SubmitSound:
+    Guid:
+      Data1: -1919610872
+      Data2: 1317711427
+      Data3: -1676971888
+      Data4: -1443037478
+    Path: event:/Submit
+  Music:
+    Guid:
+      Data1: 353952567
+      Data2: 1291263333
+      Data3: -2145420650
+      Data4: -1078468442
+    Path: event:/Music
   _timeRemaining: 0
   _hypeLevel: 0
   _machLevel: 0
-  _machLevelThresholds: []
+  _machLevelThresholds:
+  - 0
+  - 0
   _isGameStarted: 0
   _isGameFinished: 0
   _gameFinish:
@@ -2319,6 +2340,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a1322360742b10b8502aaf64560777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TypeSound:
+    Guid:
+      Data1: -684666613
+      Data2: 1171245151
+      Data3: 847102367
+      Data4: -1273358453
+    Path: event:/Type Correct
+  TypoSound:
+    Guid:
+      Data1: -1223490234
+      Data2: 1309846966
+      Data3: -1598368878
+      Data4: -1322036383
+    Path: event:/Type Wrong
+  PunctuationSound:
+    Guid:
+      Data1: 681896927
+      Data2: 1141741035
+      Data3: 1036528817
+      Data4: -394560358
+    Path: event:/Type Punctuation
   _type:
     m_PersistentCalls:
       m_Calls: []
@@ -2338,6 +2380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1072788607}
+  - component: {fileID: 1072788608}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -2360,6 +2403,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1072788608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072788606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5dccf4f51bce449b0420a74669c205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusicSound:
+    Guid:
+      Data1: 353952567
+      Data2: 1291263333
+      Data3: -2145420650
+      Data4: -1078468442
+    Path: event:/Music
+  SpeechSound:
+    Guid:
+      Data1: 1301257664
+      Data2: 1300580599
+      Data3: 304109462
+      Data4: -277027436
+    Path: event:/Speech
 --- !u!1 &1101687956
 GameObject:
   m_ObjectHideFlags: 0
