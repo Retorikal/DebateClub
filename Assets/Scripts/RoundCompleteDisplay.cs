@@ -19,6 +19,10 @@ public class RoundCompleteDisplay : MonoBehaviour {
   TMPro.TextMeshProUGUI _displayLabel;
 
 
+  void Awake() {
+    _displayLabel = transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
+  }
+
   // To be called by GameMaster
   public void Init(DisplayStats ds) {
     // TODO: Ini string formatnya sekian value terus ada newlinenya
@@ -27,9 +31,6 @@ public class RoundCompleteDisplay : MonoBehaviour {
     _displayLabel.text = displayFormat;
   }
 
-  void Awake() {
-    transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
-  }
 
   // Start is called before the first frame update
   void Start() {

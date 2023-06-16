@@ -114,6 +114,7 @@ public class GameMaster : MonoBehaviour {
 
   // Finish game
   void GameFinish() {
+    _isGameFinished = true;
     _gameFinish.Invoke();
     var sumLetters = 0;
     double sumLPM = 0;
@@ -130,6 +131,7 @@ public class GameMaster : MonoBehaviour {
       toneScore += stat.sentenceSRO.tone == SentenceSRO.Tone.AGGRESIVE ? 1 : 0;
     }
 
+    _roundCompleteDisplay.enabled = true;
     _roundCompleteDisplay.Init(new RoundCompleteDisplay.DisplayStats() {
       LongestPerfectStreak = _longestPerfectStreak,
       HighestHypeLevel = maxHypeLevel,
@@ -139,7 +141,6 @@ public class GameMaster : MonoBehaviour {
       Style = toneScore < 0 ? SentenceSRO.Tone.PERSUASIVE : SentenceSRO.Tone.AGGRESIVE
     });
 
-    _isGameFinished = true;
     LeanTween.moveLocalY(_gameEndScreen, 0, 0.5f);
     _typewriter.enabled = false;
   }
