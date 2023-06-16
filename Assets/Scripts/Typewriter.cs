@@ -15,12 +15,13 @@ public class Typewriter : MonoBehaviour {
     public double rating; // between 0 to 10
     public SentenceSRO sentenceSRO;
   }
-
+    
   [SerializeField] UnityEvent _type;
   [SerializeField] UnityEvent _typo;
   [SerializeField] UnityEvent _exclamation;
   [SerializeField] double _maxRatingLPM = 325;
   public int PaperCount { get { return _papers.Length; } }
+  public bool AcceptingInput { get; set; }
 
   Paper[] _papers;
   Paper _currentPaper;
@@ -44,6 +45,7 @@ public class Typewriter : MonoBehaviour {
     _type ??= new UnityEvent();
     _typo ??= new UnityEvent();
     _exclamation ??= new UnityEvent();
+    AcceptingInput = false;
   }
 
   // Start is called before the first frame update
@@ -57,19 +59,21 @@ public class Typewriter : MonoBehaviour {
   // Update is called once per frame
   void Update() {
     // Read input
-    string s = Input.inputString;
-    if (!(s == "")) {
-      char c = s[0];
-      switch ((int)c) {
-        case 8: // backspace
-          Debug.Log("No need to backspace.", this);
-          break;
-        case 13: // enter
-          AttemptSubmitSentence();
-          break;
-        default:
-          UpdatePaper(c);
-          break;
+    if (AcceptingInput) {
+      string s = Input.inputString;
+      if (!(s == "")) {
+        char c = s[0];
+        switch ((int)c) {
+          case 8: // backspace
+            Debug.Log("No need to backspace.", this);
+            break;
+          case 13: // enter
+            AttemptSubmitSentence();
+            break;
+          default:
+            UpdatePaper(c);
+            break;
+        }
       }
     }
   }
@@ -100,7 +104,6 @@ public class Typewriter : MonoBehaviour {
           _type.Invoke();
           break;
         }
-
 
         _typo.Invoke();
         return;

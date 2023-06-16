@@ -108,6 +108,7 @@ public class GameMaster : MonoBehaviour {
 
     LeanTween.moveLocalY(_gameStartScreen, 1000, 0.5f);
     _isGameStarted = true;
+    _typewriter.AcceptingInput = true;
     _typewriter.SetSentences(GetRandomSentences());
     _gameStart.Invoke();
   }
@@ -116,30 +117,8 @@ public class GameMaster : MonoBehaviour {
   void GameFinish() {
     _isGameFinished = true;
     _gameFinish.Invoke();
-    var sumLetters = 0;
-    double sumLPM = 0;
-    int sumMistakes = 0;
-    int sumPerfects = 0;
-    int maxHypeLevel = 0;
-    int toneScore = 0;
-    foreach (var stat in _stats) {
-      maxHypeLevel = Mathf.Max(maxHypeLevel, Mathf.Min(stat.punctuations, (int)stat.rating));
-      sumLetters += stat.sentenceSRO.sentence.Length;
-      sumLPM += stat.lpm;
-      sumPerfects += stat.mistakes == 0 ? 1 : 0;
-      sumMistakes += stat.mistakes;
-      toneScore += stat.sentenceSRO.tone == SentenceSRO.Tone.AGGRESIVE ? 1 : 0;
-    }
-
-    _roundCompleteDisplay.enabled = true;
-    _roundCompleteDisplay.Init(new RoundCompleteDisplay.DisplayStats() {
-      LongestPerfectStreak = _longestPerfectStreak,
-      HighestHypeLevel = maxHypeLevel,
-      LPM = sumLPM / sumLetters,
-      Perfects = sumPerfects,
-      Mistakes = sumMistakes,
-      Style = toneScore < 0 ? SentenceSRO.Tone.PERSUASIVE : SentenceSRO.Tone.AGGRESIVE
-    });
+    _typewriter.AcceptingInput = false;
+    _roundCompleteDisplay.Init(RoundCompleteDisplay.DisplayStats.Compile(_stats));
 
     LeanTween.moveLocalY(_gameEndScreen, 0, 0.5f);
     _typewriter.enabled = false;
