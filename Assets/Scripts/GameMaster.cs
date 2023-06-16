@@ -139,6 +139,7 @@ public class GameMaster : MonoBehaviour {
   }
 
   void OnSentenceSubmit(Typewriter.TypingStatistics stats) {
+     AudioManager.instance.PlayOneShot(FmodEvents.instance.SubmitSound, this.transform.position);
     _stats.Add(stats);
     _typewriter.SetSentences(GetRandomSentences());
     if (stats.mistakes == 0) {

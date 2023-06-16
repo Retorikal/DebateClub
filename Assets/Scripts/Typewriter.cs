@@ -6,6 +6,7 @@ using System;
 
 // Responsible for sentence reading, calculating per-sentence wpm, 
 public class Typewriter : MonoBehaviour {
+
   [System.Serializable]
   public class TypingStatistics {
     public double lpm;
@@ -113,10 +114,17 @@ public class Typewriter : MonoBehaviour {
       _currentStatistics.mistakes += isCorrect ? 0 : 1;
       Debug.Log("Typed " + c + (isCorrect ? "(Hit)" : "(Miss)"), this);
 
-      if (isCorrect)
-        _type.Invoke();
-      else
-        _typo.Invoke();
+            if (isCorrect)
+            {
+                AudioManager.instance.PlayOneShot(FmodEvents.instance.TypeSound, this.transform.position);
+                _type.Invoke();
+            }
+            else
+            {
+                AudioManager.instance.PlayOneShot(FmodEvents.instance.TypoSound, this.transform.position);
+                _typo.Invoke();
+            }
+               
 
     }
   }
