@@ -1855,20 +1855,6 @@ MonoBehaviour:
   - tone: 1
     sentenceFile: {fileID: 4900000, guid: 6eb10323807a45445b037fd6d35ebaa7, type: 3}
   _fixedSentences: []
-  SubmitSound:
-    Guid:
-      Data1: -1919610872
-      Data2: 1317711427
-      Data3: -1676971888
-      Data4: -1443037478
-    Path: event:/Submit
-  Music:
-    Guid:
-      Data1: 353952567
-      Data2: 1291263333
-      Data3: -2145420650
-      Data4: -1078468442
-    Path: event:/Music
   _timeRemaining: 0
   _hypeLevel: 0
   _machLevel: 0
@@ -2069,6 +2055,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642074029}
   m_CullTransparentMesh: 1
+--- !u!1 &681183631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 681183632}
+  - component: {fileID: 681183633}
+  m_Layer: 0
+  m_Name: FmodEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &681183632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681183631}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1072788607}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &681183633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681183631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67b56e279a7870b4da37f90c38d7b09e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <TypeSound>k__BackingField:
+    Guid:
+      Data1: -684666613
+      Data2: 1171245151
+      Data3: 847102367
+      Data4: -1273358453
+    Path: event:/Type Correct
+  <TypoSound>k__BackingField:
+    Guid:
+      Data1: -1223490234
+      Data2: 1309846966
+      Data3: -1598368878
+      Data4: -1322036383
+    Path: event:/Type Wrong
+  <SubmitSound>k__BackingField:
+    Guid:
+      Data1: -1919610872
+      Data2: 1317711427
+      Data3: -1676971888
+      Data4: -1443037478
+    Path: event:/Submit
+  <PunctuationSound>k__BackingField:
+    Guid:
+      Data1: 681896927
+      Data2: 1141741035
+      Data3: 1036528817
+      Data4: -394560358
+    Path: event:/Type Punctuation
+  <MainBGM>k__BackingField:
+    Guid:
+      Data1: 353952567
+      Data2: 1291263333
+      Data3: -2145420650
+      Data4: -1078468442
+    Path: event:/Music
 --- !u!1 &735742357
 GameObject:
   m_ObjectHideFlags: 0
@@ -2340,27 +2405,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a1322360742b10b8502aaf64560777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeSound:
-    Guid:
-      Data1: -684666613
-      Data2: 1171245151
-      Data3: 847102367
-      Data4: -1273358453
-    Path: event:/Type Correct
-  TypoSound:
-    Guid:
-      Data1: -1223490234
-      Data2: 1309846966
-      Data3: -1598368878
-      Data4: -1322036383
-    Path: event:/Type Wrong
-  PunctuationSound:
-    Guid:
-      Data1: 681896927
-      Data2: 1141741035
-      Data3: 1036528817
-      Data4: -394560358
-    Path: event:/Type Punctuation
   _type:
     m_PersistentCalls:
       m_Calls: []
@@ -2399,7 +2443,8 @@ Transform:
   m_LocalPosition: {x: -0.9718631, y: -1.3689753, z: -0.018343553}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 681183632}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2415,20 +2460,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5dccf4f51bce449b0420a74669c205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MusicSound:
-    Guid:
-      Data1: 353952567
-      Data2: 1291263333
-      Data3: -2145420650
-      Data4: -1078468442
-    Path: event:/Music
-  SpeechSound:
-    Guid:
-      Data1: 1301257664
-      Data2: 1300580599
-      Data3: 304109462
-      Data4: -277027436
-    Path: event:/Speech
 --- !u!1 &1101687956
 GameObject:
   m_ObjectHideFlags: 0

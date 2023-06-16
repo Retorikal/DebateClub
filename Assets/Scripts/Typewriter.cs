@@ -3,14 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
-using FMODUnity;
 
 // Responsible for sentence reading, calculating per-sentence wpm, 
 public class Typewriter : MonoBehaviour {
-
-    [SerializeField] private EventReference TypeSound;
-    [SerializeField] private EventReference TypoSound;
-    [SerializeField] private EventReference PunctuationSound;
 
   [System.Serializable]
   public class TypingStatistics {
@@ -118,12 +113,12 @@ public class Typewriter : MonoBehaviour {
 
             if (isCorrect)
             {
-                AudioManager.instance.PlayOneShot(TypeSound, this.transform.position);
+                AudioManager.instance.PlayOneShot(FmodEvents.instance.TypeSound, this.transform.position);
                 _type.Invoke();
             }
             else
             {
-                AudioManager.instance.PlayOneShot(TypoSound, this.transform.position);
+                AudioManager.instance.PlayOneShot(FmodEvents.instance.TypoSound, this.transform.position);
                 _typo.Invoke();
             }
                

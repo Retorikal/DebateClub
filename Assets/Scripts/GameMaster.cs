@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using FMODUnity;
 
 public class GameMaster : MonoBehaviour {
 
@@ -16,9 +15,6 @@ public class GameMaster : MonoBehaviour {
   [SerializeField] Typewriter _typewriter;
   [SerializeField] SentenceList[] _wordLists;
   [SerializeField] SentenceSRO[] _fixedSentences; // for if no wordlist
-
-  [SerializeField] private EventReference SubmitSound;
-  [SerializeField] private EventReference Music;
 
   [SerializeField] double _timeRemaining;
   [SerializeField] double _hypeLevel;
@@ -164,7 +160,7 @@ public class GameMaster : MonoBehaviour {
   }
 
   void OnSentenceSubmit(Typewriter.TypingStatistics stats) {
-     AudioManager.instance.PlayOneShot(SubmitSound, this.transform.position);
+     AudioManager.instance.PlayOneShot(FmodEvents.instance.SubmitSound, this.transform.position);
     _stats.Add(stats);
     _typewriter.SetSentences(GetRandomSentences());
     if (stats.mistakes == 0) {
