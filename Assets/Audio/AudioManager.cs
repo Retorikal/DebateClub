@@ -47,6 +47,11 @@ public class AudioManager : MonoBehaviour {
     RuntimeManager.PlayOneShot(FmodEvents.instance.PunctuationSound, m.transform.position);
   }
 
+
+  public void PlaySample(int a) {
+    // RuntimeManager.PlayOneShot(FmodEvents.instance.PunctuationSound, m.transform.position);
+  }
+
   public void PlayOneShot(EventReference sound, Vector3 worldPos) {
     RuntimeManager.PlayOneShot(sound, worldPos);
   }

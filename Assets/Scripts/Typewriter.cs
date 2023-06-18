@@ -102,7 +102,7 @@ public class Typewriter : MonoBehaviour {
           Debug.Log("Sentence locked in: " + paper.Sentence, this);
           _currentPaper = paper;
           _currentStatistics.sentenceSRO = _currentPaper.SentenceSRO;
-          _type.Invoke(this); ;
+          _type.Invoke(this);
           break;
         }
 
@@ -119,8 +119,6 @@ public class Typewriter : MonoBehaviour {
       } else {
         _typo.Invoke(this);
       }
-
-
     }
   }
 

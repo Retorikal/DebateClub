@@ -38,6 +38,8 @@ public class GameMaster : MonoBehaviour {
   GameObject _gameStartScreen;
   GameObject _gameEndScreen;
 
+  public double GetHypeValue { get { return _hypeLevel; } }
+
   double HypeLevel {
     get { return _hypeLevel; }
     set {
@@ -150,7 +152,7 @@ public class GameMaster : MonoBehaviour {
       _perfectStreak = 0;
     }
     double multiplier = stats.punctuations <= stats.rating ?
-      stats.punctuations * _punctuationBonusMultiplier : // Multiply by punctuations if guessed correctly
+      1 + stats.punctuations * _punctuationBonusMultiplier : // Multiply by punctuations if guessed correctly
       _punctuationOverMultiplier; // penalty if wrong guess
     double hypeLevelIncrease = stats.rating * multiplier * _submitHypeMultiplier;
 

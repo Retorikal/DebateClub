@@ -2559,10 +2559,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1072788608}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: PlayTypeOnsehot
-        m_Mode: 0
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.MonoBehaviour, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
