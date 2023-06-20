@@ -16,10 +16,10 @@ public class Typewriter : MonoBehaviour {
     public double rating; // between 0 to 10
     public SentenceSRO sentenceSRO;
   }
-    
-  [SerializeField] UnityEvent _type;
-  [SerializeField] UnityEvent _typo;
-  [SerializeField] UnityEvent _exclamation;
+
+  [SerializeField] UnityEvent<MonoBehaviour> _type;
+  [SerializeField] UnityEvent<MonoBehaviour> _typo;
+  [SerializeField] UnityEvent<MonoBehaviour> _exclamation;
   [SerializeField] double _maxRatingLPM = 325;
   public int PaperCount { get { return _papers.Length; } }
   public bool AcceptingInput { get; set; }
@@ -43,9 +43,9 @@ public class Typewriter : MonoBehaviour {
   // Awake
   void Awake() {
     _papers = GetComponentsInChildren<Paper>();
-    _type ??= new UnityEvent();
-    _typo ??= new UnityEvent();
-    _exclamation ??= new UnityEvent();
+    _type ??= new UnityEvent<MonoBehaviour>();
+    _typo ??= new UnityEvent<MonoBehaviour>();
+    _exclamation ??= new UnityEvent<MonoBehaviour>();
     AcceptingInput = false;
   }
 
@@ -85,7 +85,7 @@ public class Typewriter : MonoBehaviour {
       bool festive = false;
       _currentPaper.AddExclamationMark(festive);
       _currentStatistics.punctuations++;
-      _exclamation.Invoke();
+      _exclamation.Invoke(this);
       Debug.Log("EXCLAMATION!");
     } else {
       // Check and assign the SentenceSRO if not locked in yet
@@ -102,11 +102,11 @@ public class Typewriter : MonoBehaviour {
           Debug.Log("Sentence locked in: " + paper.Sentence, this);
           _currentPaper = paper;
           _currentStatistics.sentenceSRO = _currentPaper.SentenceSRO;
-          _type.Invoke();
+          _type.Invoke(this);
           break;
         }
 
-        _typo.Invoke();
+        _typo.Invoke(this);
         return;
       }
 
@@ -114,18 +114,11 @@ public class Typewriter : MonoBehaviour {
       _currentStatistics.mistakes += isCorrect ? 0 : 1;
       Debug.Log("Typed " + c + (isCorrect ? "(Hit)" : "(Miss)"), this);
 
-            if (isCorrect)
-            {
-                AudioManager.instance.PlayOneShot(FmodEvents.instance.TypeSound, this.transform.position);
-                _type.Invoke();
-            }
-            else
-            {
-                AudioManager.instance.PlayOneShot(FmodEvents.instance.TypoSound, this.transform.position);
-                _typo.Invoke();
-            }
-               
-
+      if (isCorrect) {
+        _type.Invoke(this);
+      } else {
+        _typo.Invoke(this);
+      }
     }
   }
 
